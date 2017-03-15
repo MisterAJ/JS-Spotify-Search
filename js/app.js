@@ -19,7 +19,7 @@ $('form').submit(function (evt) {
         $.each(spotifyResponse.albums.items, function (i,item) {
             displayAlbumHTML += `
 	    			<li>
-	    				<a href="${item.external_urls.spotify}" id=${i}>
+	    				<a href="${item.external_urls.spotify}" target="_blank" id=${i}>
 	    					<div class="album-wrap">
 	    						<img class="album-art" src="${item.images[0].url}">
 	    					</div>
