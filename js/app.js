@@ -8,7 +8,7 @@ $('form').submit(function (evt) {
 
 
     let spotifyAPI = "https://api.spotify.com/v1/search";
-    let searchTerm = encodeURI($searchField.val());
+    let searchTerm = $searchField.val();
     let data = {q: searchTerm,
                 type: "album"};
     console.log(data);
