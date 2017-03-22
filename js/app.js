@@ -1,4 +1,5 @@
 $('form').submit(function (evt) {
+    // Prevent form from submitting
     evt.preventDefault();
     let $searchField = $('#search');
     let $submitButton = $('#submit');
@@ -15,7 +16,11 @@ $('form').submit(function (evt) {
 
     let displayAlbumHTML = '';
     function displayAlbum(spotifyResponse) {
+        // Removes Description Place Holder
         $('.desc').remove();
+        // Log Response for debugging
+        console.log(spotifyResponse);
+        // Iterate through list and append to displayAlbumHTML variable
         $.each(spotifyResponse.albums.items, function (i,album) {
             displayAlbumHTML += `
 	    			<li>
@@ -33,17 +38,19 @@ $('form').submit(function (evt) {
         $searchField.prop("disabled", false);
         $submitButton.attr("disabled", false);
 
+        // If no results are found there will be nothing appended to the displayAlbumHTML variable
+        // This notifies the user than no results were found
         if(displayAlbumHTML === '') {
             displayAlbumHTML = `
             <li class='no-albums'>
-                <i class='material-icons icon-help'>help_outline</i>No albums found that match: [search form value].
+                <i class='material-icons icon-help'>help_outline</i>No albums found that match: ${searchTerm}
             </li>`
         }
-
+        // and the displayAlbumHTML to DOM
         $('#albums').html(displayAlbumHTML);
 
     }
 
-
+    // Get request to Spotify
     $.getJSON(spotifyAPI,data,displayAlbum);
 });
